@@ -19,6 +19,17 @@ public class ReportCard {
         this.mSubjects = new ArrayList<>();
         this.mGrades = new ArrayList<>();
     }
+    public double getAverageGrade(){
+        int sum =0;
+
+        for(int i = 0; i < mGrades.size(); i++){
+            sum += mGrades.get(i);
+
+        }
+        double averageGrade = sum / mGrades.size();
+        return averageGrade;
+    }
+
     public int getStudentId(){
         return mStudentId;
     }
@@ -39,17 +50,8 @@ public class ReportCard {
     public void setmGrades(List<Integer> grades){
         this.mGrades = grades;
     }
-    public double getAverageGrade(){
-        int sum =0;
 
-        for(int i = 0; i < mGrades.size(); i++){
-            sum += mGrades.get(i);
-
-        }
-        double averageGrade = sum / mGrades.size();
-        return averageGrade;
-    }
-    public String getSubjectsWithGrades(int index){
+    public String getSubjectWithGrade(int index){
         List<String> subjects = getSubjects();
         List<Integer> grades = getGrades();
 
@@ -57,11 +59,18 @@ public class ReportCard {
                 Integer.toString(grades.get(index));
         return subjectsWithGrades;
     }
+    public String getSubjectsWithGrades(){
+        String allSubjectsWithGrades = "";
+        for(int i = 0; i < mSubjects.size(); i++){
+            allSubjectsWithGrades+=getSubjectWithGrade(i);
+        }
+        return allSubjectsWithGrades;
+    }
 
     @Override
     public String toString() {
         String reportCard = "University: " +getUniversityName() + "\n" + "Student ID: " + Integer.toString(getStudentId())+"\n" +
-                "Average grade: " + getAverageGrade() + "\n";
+                "Subjects: "+getSubjectsWithGrades()+"Average grade: " + getAverageGrade() + "\n";
         return reportCard;
 
     }
